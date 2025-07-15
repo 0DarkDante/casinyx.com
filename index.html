@@ -394,27 +394,85 @@ var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false
 <script src="js/elements-handlers.min.js" id="pro-elements-handlers-js"></script>
 
 <!-- COOKIE BANNER START -->
-<div id="cookie-consent-banner" style="position:fixed;bottom:0;left:0;right:0;background:#222;color:#f5f5f5;padding:15px 20px;font-size:14px;display:flex;justify-content:space-between;align-items:center;z-index:9999;box-shadow:0 -2px 5px rgba(0,0,0,0.3);">
-  <div>
-    Ce site utilise des cookies pour améliorer votre expérience. En continuant, vous acceptez notre
-    <a href="/cookies.html" style="color:#8c8701;text-decoration:underline;">Politique des cookies</a>.
+<div id="cookie-consent-banner" style="
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(90deg, #3c1a1a, #6b1e28);
+  color: #fdf6f9;
+  padding: 1rem 1.5rem;
+  font-size: 0.95rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 9999;
+  box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.6);
+  animation: slideUp 0.6s ease-out;
+">
+
+  <div style="max-width: 80%;">
+    Ce site utilise des cookies pour garantir la meilleure expérience utilisateur. En continuant, vous acceptez notre
+    <a href="/cookies.html" style="color: #FFD700; text-decoration: underline;">politique des cookies</a>.
   </div>
-  <button id="accept-cookies-btn" style="background:#8c8701;color:#fff;border:none;padding:8px 16px;margin-left:20px;border-radius:4px;cursor:pointer;font-weight:bold;">
-    J’accepte
-  </button>
+
+  <button id="accept-cookies-btn" style="
+    background: linear-gradient(90deg, #FFD700, #852323);
+    color: #1c1000;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 1rem;
+    box-shadow: 0 2px 6px rgba(255, 143, 0, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  ">J’accepte</button>
+
 </div>
+
+<style>
+  @keyframes slideUp {
+    from {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0%);
+      opacity: 1;
+    }
+  }
+
+  #accept-cookies-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(255, 143, 0, 0.6);
+  }
+
+  @media (max-width: 600px) {
+    #cookie-consent-banner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.8rem;
+    }
+
+    #accept-cookies-btn {
+      width: 100%;
+      text-align: center;
+    }
+  }
+</style>
 
 <script>
   (function () {
     const banner = document.getElementById('cookie-consent-banner');
     const btn = document.getElementById('accept-cookies-btn');
 
-    // Hide banner if consent already given
+    // Якщо згода вже дана, приховати банер
     if (localStorage.getItem('cookiesAccepted') === 'true') {
       banner.style.display = 'none';
     }
 
-    // Handle consent
+    // При натисканні — записати згоду та приховати банер
     btn.addEventListener('click', function () {
       localStorage.setItem('cookiesAccepted', 'true');
       banner.style.display = 'none';
@@ -423,90 +481,213 @@ var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false
 </script>
 <!-- COOKIE BANNER END -->
 
+
 <!-- MODAL 18+ START -->
-<div id="age-modal" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);display:flex;align-items:center;justify-content:center;z-index:10000;">
-  <div style="background:#441313;color:#f5f5f5;padding:30px;max-width:420px;width:90%;text-align:center;border-radius:12px;box-shadow:0 0 30px rgba(0,0,0,0.6);transform:scale(1);transition:transform 0.3s ease;">
-    <h2 style="margin-bottom:20px;font-size:22px;">Avez-vous 18 ans ou plus ?</h2>
-    <div style="display:flex;justify-content:center;gap:20px;">
-      <button id="btn-yes" style="background:#FFD700;color:#1c1800;border:none;padding:12px 24px;border-radius:6px;cursor:pointer;font-weight:bold;transition:all 0.3s ease;box-shadow:0 0 8px #FFD700;">Oui</button>
-      <button id="btn-no" style="background:#8c8701;color:#fff;border:none;padding:12px 24px;border-radius:6px;cursor:pointer;font-weight:bold;transition:all 0.3s ease;box-shadow:0 0 8px #8c8701;">Non</button>
+<div id="age-modal" style="
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 0, 10, 0.92);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+">
+  <div style="
+    background: linear-gradient(145deg, #3c1a1a, #6b1e28);
+    color: #f5f5f5;
+    padding: 2.2rem;
+    border-radius: 1rem;
+    text-align: center;
+    max-width: 400px;
+    width: 92%;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.75);
+    animation: fadeIn 0.4s ease;
+  ">
+    <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem; color: #FFD700;">Avez-vous 18 ans ou plus ?</h2>
+    <div style="display: flex; justify-content: center; gap: 1rem;">
+      <button id="btn-yes" style="
+        background: linear-gradient(90deg, #FFD700, #852323);
+        color: #1c1000;
+        font-weight: bold;
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(255, 143, 0, 0.5);
+        transition: all 0.3s ease;
+      ">Oui</button>
+
+      <button id="btn-no" style="
+        background: linear-gradient(90deg, #6b1e28, #3c1a1a);
+        color: #FFD700;
+        font-weight: bold;
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(255, 143, 0, 0.3);
+        transition: all 0.3s ease;
+      ">Non</button>
     </div>
   </div>
 </div>
 
+<style>
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+</style>
+
 <script>
-  (function () {
+  document.addEventListener('DOMContentLoaded', function () {
     const modal = document.getElementById('age-modal');
     const yesBtn = document.getElementById('btn-yes');
     const noBtn = document.getElementById('btn-no');
 
-    // Apply button click animation
-    [yesBtn, noBtn].forEach(btn => {
-      btn.addEventListener('mousedown', () => {
-        btn.style.transform = 'scale(0.95)';
-      });
-      btn.addEventListener('mouseup', () => {
-        btn.style.transform = 'scale(1)';
-      });
-      btn.addEventListener('mouseleave', () => {
-        btn.style.transform = 'scale(1)';
-      });
-    });
+    const hasConfirmedAge = localStorage.getItem('is18orOlder') === 'true';
 
-    // Skip modal if already accepted
-    if (localStorage.getItem('is18orOlder') === 'true') {
-      modal.style.display = 'none';
+    if (!hasConfirmedAge) {
+      modal.style.display = 'flex';
     }
 
-    yesBtn.addEventListener('click', function () {
+    yesBtn.addEventListener('click', () => {
       localStorage.setItem('is18orOlder', 'true');
       modal.style.display = 'none';
     });
 
-    noBtn.addEventListener('click', function () {
+    noBtn.addEventListener('click', () => {
       window.location.href = 'https://www.google.com';
     });
-  })();
+
+    // Клік ефект на кнопки
+    [yesBtn, noBtn].forEach(btn => {
+      ['mousedown', 'touchstart'].forEach(evt =>
+        btn.addEventListener(evt, () => btn.style.transform = 'scale(0.96)')
+      );
+      ['mouseup', 'mouseleave', 'touchend'].forEach(evt =>
+        btn.addEventListener(evt, () => btn.style.transform = 'scale(1)')
+      );
+    });
+  });
 </script>
 <!-- MODAL 18+ END -->
 
+
 <!-- CONTACT MODAL START -->
-<div id="contact-modal" style="display:none; position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:10001;align-items:center;justify-content:center;">
-  <div style="background:#441313; color:#f5f5f5; padding:30px; max-width:400px; width:90%; border-radius:12px; position:relative; box-shadow: 0 0 25px rgba(0,0,0,0.7);">
-    <button id="contact-close" style="position:absolute; top:12px; right:15px; background:none; border:none; color:#f5f5f5; font-size:22px; cursor:pointer;" aria-label="Fermer la fenêtre">&times;</button>
-    <h2 style="margin-bottom:20px; text-align:center;">Contactez-nous</h2>
-    <form id="contact-form" style="display:flex; flex-direction: column; gap:15px;">
-      <input type="text" name="name" placeholder="Votre nom" required style="padding:10px; border-radius:6px; border:none; font-size:16px;">
-      <input type="email" name="email" placeholder="Votre email" required style="padding:10px; border-radius:6px; border:none; font-size:16px;">
-      <textarea name="message" placeholder="Votre message" required rows="5" style="padding:10px; border-radius:6px; border:none; font-size:16px; resize:none;"></textarea>
-      <button type="submit" style="background:#FFD700; color:#1c1800; border:none; padding:12px; font-weight:bold; border-radius:6px; cursor:pointer; transition: background-color 0.3s ease;">Envoyer</button>
+<div id="contact-modal" style="display:none; position:fixed; inset:0; background:rgba(10,0,10,0.9); z-index:10001; align-items:center; justify-content:center;">
+
+  <div style="
+    backdrop-filter: blur(12px);
+    background: linear-gradient(160deg, rgba(60,20,30,0.95), rgba(20,10,10,0.95));
+    color: #fdf6f9;
+    padding: 2.5rem;
+    max-width: 460px;
+    width: 92%;
+    border-radius: 1.2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.85);
+    position: relative;
+    animation: fadeIn 0.4s ease-out;
+  ">
+    <button id="contact-close" style="
+      position:absolute; top:15px; right:20px;
+      background:none; border:none;
+      font-size:1.8rem; color:#FF8F00;
+      cursor:pointer; line-height:1;
+    " aria-label="Fermer la fenêtre">&times;</button>
+
+    <h2 style="text-align:center; font-size:1.9rem; margin-bottom:1.5rem; letter-spacing:0.5px; color:#FFD700;">Nous écrire</h2>
+
+    <form id="contact-form" style="display:flex; flex-direction:column; gap:1rem;">
+
+      <input type="text" name="name" placeholder="Nom complet" required style="
+        padding:0.9rem 1rem;
+        border-radius:8px;
+        border:none;
+        background:rgba(255,255,255,0.05);
+        color:#fff;
+        font-size:1rem;
+        outline:none;
+        transition:background 0.3s ease;
+      " />
+
+      <input type="email" name="email" placeholder="Adresse email" required style="
+        padding:0.9rem 1rem;
+        border-radius:8px;
+        border:none;
+        background:rgba(255,255,255,0.05);
+        color:#fff;
+        font-size:1rem;
+        outline:none;
+      " />
+
+      <textarea name="message" placeholder="Votre message..." rows="5" required style="
+        padding:0.9rem 1rem;
+        border-radius:8px;
+        border:none;
+        background:rgba(255,255,255,0.05);
+        color:#fff;
+        font-size:1rem;
+        resize:none;
+        outline:none;
+      "></textarea>
+
+      <button type="submit" style="
+        background:linear-gradient(90deg, #FF8F00, #852323);
+        color:#1c1000;
+        font-weight:700;
+        padding:0.9rem;
+        font-size:1rem;
+        border:none;
+        border-radius:8px;
+        cursor:pointer;
+        transition: all 0.3s ease;
+        box-shadow:0 4px 12px rgba(255, 143, 0, 0.5);
+      ">Envoyer le message</button>
     </form>
-    <div id="contact-status" style="margin-top:15px; text-align:center; font-weight:bold;"></div>
+
+    <div id="contact-status" style="margin-top:1rem; text-align:center; font-weight:500; font-size:1rem;"></div>
   </div>
 </div>
 
+<!-- FADE IN ANIMATION -->
+<style>
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+</style>
+
+
+
 <script>
-  (function(){
+  (function () {
     const contactModal = document.getElementById('contact-modal');
     const contactClose = document.getElementById('contact-close');
     const contactForm = document.getElementById('contact-form');
     const contactStatus = document.getElementById('contact-status');
 
-    // Клік по "Contact" у меню
-    document.querySelector('li.menu-item-3358 > a.elementor-item').addEventListener('click', function(e) {
-      e.preventDefault();
-      contactModal.style.display = 'flex';
-    });
+    // Прив'язка до меню-кнопки "Nous Contacter"
+    const contactTrigger = document.querySelector('li.menu-item-3358 > a.elementor-item');
+    if (contactTrigger) {
+      contactTrigger.addEventListener('click', function (e) {
+        e.preventDefault();
+        contactModal.style.display = 'flex';
+      });
+    }
 
-    // Закрити модалку при кліку на хрестик
-    contactClose.addEventListener('click', function() {
+    // Закриття модалки через кнопку
+    contactClose.addEventListener('click', () => {
       contactModal.style.display = 'none';
       contactStatus.textContent = '';
       contactForm.reset();
     });
 
-    // Закрити модалку, якщо клік за межами контенту
-    contactModal.addEventListener('click', function(e) {
+    // Закриття при кліку поза контентом
+    contactModal.addEventListener('click', e => {
       if (e.target === contactModal) {
         contactModal.style.display = 'none';
         contactStatus.textContent = '';
@@ -515,27 +696,20 @@ var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false
     });
 
     // Обробка відправки форми
-    contactForm.addEventListener('submit', function(e) {
+    contactForm.addEventListener('submit', function (e) {
       e.preventDefault();
-
-      // Проста валідація (вже є required, тому це додатково)
-      if (!contactForm.checkValidity()) {
-        contactStatus.style.color = '#dc3545';
-        contactStatus.textContent = 'Veuillez remplir tous les champs correctement.';
-        return;
-      }
-
-      // Імітація відправки (заміни на свій бекенд / API)
-      contactStatus.style.color = '#FFD700';
+      contactStatus.style.color = '#FF8F00';
       contactStatus.textContent = 'Envoi en cours...';
 
       setTimeout(() => {
         contactStatus.style.color = '#28a745';
-        contactStatus.textContent = 'Merci ! Votre message a été envoyé.';
+        contactStatus.textContent = 'Merci ! Votre message a bien été envoyé.';
         contactForm.reset();
       }, 1500);
     });
   })();
 </script>
+
+
 
 </body></html>
