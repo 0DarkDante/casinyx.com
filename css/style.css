@@ -232,47 +232,85 @@
     flex: 1 1 100%;
   }
 }
- /* Відступи зверху й знизу враховуючи header/footer */
- .page-container {
-   max-width: 800px;
-   margin: 120px auto 120px auto;
-   /* 80px зверху і знизу */
-   padding: 0 20px;
-   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-   color: #333333;
-   line-height: 1.6;
-
-   /* Анімація появи */
+ .page-terms {
+   padding: 120px 20px;
+   font-family: 'Segoe UI', Tahoma, sans-serif;
+   background: linear-gradient(135deg, #3c1a1a, #6b1e28);
+   color: #fdf6f9;
+   animation: fadeInUp 0.8s ease forwards;
    opacity: 0;
    transform: translateY(20px);
-   animation: fadeInUp 0.8s ease forwards;
-   animation-delay: 0.2s;
  }
 
- .page-container h1 {
-   font-size: 2.5rem;
-   font-weight: 700;
+ .page-terms .terms-wrapper {
+   max-width: 900px;
+   margin: 0 auto;
+ }
+
+ .page-terms h1 {
+   font-size: 2.8rem;
+   margin-bottom: 40px;
+   color: #FFD700;
+   text-align: center;
+   line-height: 1.2;
+ }
+
+ .page-terms h1 span {
+   color: #ffffff;
+   font-weight: 300;
+   display: block;
+ }
+
+ .terms-section {
+   display: flex;
+   align-items: flex-start;
+   gap: 20px;
+   background: rgba(255, 255, 255, 0.05);
+   border-left: 4px solid #FF8F00;
+   border-radius: 12px;
+   padding: 20px;
    margin-bottom: 24px;
-   color: #441313;
-   /* темно-бордовий */
  }
 
- .page-container p {
-   font-size: 1.125rem;
-   margin-bottom: 18px;
-   color: #4a4a4a;
+ .terms-section img {
+   width: 60px;
+   height: auto;
+   flex-shrink: 0;
+   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
  }
 
- .page-container p strong {
-   color: #8c8701;
-   /* золотий */
-   font-weight: 700;
+ .terms-section h2 {
+   font-size: 1.5rem;
+   margin-bottom: 10px;
+   color: #FFD700;
  }
 
- /* Ключові кадри анімації */
+ .terms-section p {
+   font-size: 1.1rem;
+   line-height: 1.6;
+ }
+
+ .terms-section a {
+   color: #FF8F00;
+   text-decoration: underline;
+   font-weight: 600;
+ }
+
  @keyframes fadeInUp {
    to {
      opacity: 1;
      transform: translateY(0);
+   }
+ }
+
+ /* Mobile-friendly */
+ @media (max-width: 600px) {
+   .terms-section {
+     flex-direction: column;
+     text-align: left;
+   }
+
+   .terms-section img {
+     width: 48px;
    }
  }
